@@ -1,0 +1,124 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #080d17;
+  --color-surface: #101827;
+  --color-surface-2: #151f31;
+  --color-line: #22304a;
+  --color-muted: #94a3b8;
+  --color-accent: #3b82f6;
+  --color-accent-soft: #22d3ee;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink font-sans text-white antialiased;
+    background-image: radial-gradient(
+      900px 520px at 85% -10%,
+      rgba(59, 130, 246, 0.08),
+      transparent 70%
+    );
+  }
+
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  ::selection {
+    background: rgba(59, 130, 246, 0.35);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8;
+  }
+
+  .section-padding {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .surface-card {
+    @apply rounded-2xl border border-line bg-surface/70;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-accent bg-accent px-5 py-3 text-sm font-semibold text-ink transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-400;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-surface/60 px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent via-sky-300 to-accent-soft bg-clip-text text-transparent;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -12%;
+    right: 0;
+    left: 0;
+    height: 560px;
+    pointer-events: none;
+    background: radial-gradient(
+      60% 60% at 72% 28%,
+      rgba(59, 130, 246, 0.16),
+      transparent 70%
+    );
+  }
+
+  .portrait-frame {
+    @apply relative rounded-[2rem] border border-line bg-surface p-2;
+    box-shadow: 0 0 90px -25px rgba(59, 130, 246, 0.55);
+  }
+
+  .document-preview {
+    @apply aspect-[3/4] rounded-2xl border border-line bg-gradient-to-b from-surface to-ink;
+  }
+
+  .field-label {
+    @apply block text-sm font-medium text-white/85;
+  }
+
+  .field-input {
+    @apply mt-2.5 w-full rounded-xl border border-line bg-ink/60 px-4 py-3 text-sm text-white transition-colors placeholder:text-muted/50 focus:border-accent focus:outline-none;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink;
+  }
+
+  .reveal {
+    @apply translate-y-6 opacity-0 transition-all duration-700 ease-out;
+  }
+
+  .reveal-visible {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .btn-primary,
+  .btn-outline {
+    transition: none !important;
+    transform: none !important;
+  }
+}
